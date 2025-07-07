@@ -2,6 +2,7 @@
 
     use App\Http\Controllers\registrarUsuariosController;
     use App\Http\Controllers\loginController;
+    use App\Http\Controllers\tareasController;
     
     Route::get('/', function () {
         return view('principal');
@@ -15,14 +16,9 @@
         return view('login');
     });
     Route::post('/loguearUsuario', [loginController::class, 'loginUsuario']);
-    
-    Route::get('/tareas', function () {
-    if (!session('token')) {
-        return redirect('/login')->with('error', 'no seas cochino, inicia sesión primero');
-    }
-    return view('tareas');
-    });
-    
+    Route::get('/tareas', [tareasController::class, 'crearTarea']);
+    Route::post('/guardar-Tarea', [tareasController::class, 'guardarTarea']);
+
     Route::get('/logout', [loginController::class, 'logoutUsuario']);
 
     

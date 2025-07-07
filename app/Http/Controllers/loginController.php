@@ -20,7 +20,8 @@ class loginController extends Controller
         if ($response->successful()) {
             $tokenData = $response->json();
             session(['token' => $tokenData['access_token']]);
-            return redirect('/privado');
+            
+            return redirect('/tareas');
         } else {
             return redirect('/login')->with('error', 'Credenciales inválidas');
         }
